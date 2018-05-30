@@ -1,0 +1,949 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     41808,        941]
+NotebookOptionsPosition[     38797,        898]
+NotebookOutlinePosition[     39143,        913]
+CellTagsIndexPosition[     39100,        910]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randomGenome", "[", 
+   RowBox[{"genomeSize_", ",", "codons_"}], "]"}], ":=", 
+  RowBox[{"genome", "@@", 
+   RowBox[{"RandomChoice", "[", 
+    RowBox[{"codons", ",", "genomeSize"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7188493998854513`*^9, 3.718849403788515*^9}, {
+  3.7188495066761045`*^9, 3.7188495146650667`*^9}, {3.7188497073999844`*^9, 
+  3.7188497203888245`*^9}, {3.718849775083671*^9, 3.718849810939005*^9}, {
+  3.718849918521152*^9, 3.718849922436784*^9}, {3.7188499872050695`*^9, 
+  3.718849990220244*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"22e908fa-0dfc-4ee3-9717-8194d6ae2455"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randomEcosystem", "[", 
+   RowBox[{"ecosystemSize_", ",", "genomeSize_", ",", "codons_"}], "]"}], ":=", 
+  RowBox[{"ecosystem", "@@", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"randomGenome", "[", 
+      RowBox[{"genomeSize", ",", "codons"}], "]"}], ",", "ecosystemSize"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.718849190120305*^9, 3.718849196236705*^9}, {
+  3.71884926435242*^9, 3.7188492812044024`*^9}, {3.718849369596411*^9, 
+  3.7188493897994194`*^9}, {3.718849764852706*^9, 3.7188497717343397`*^9}, {
+  3.7188499056347065`*^9, 3.718849913703603*^9}, {3.7188499754375596`*^9, 
+  3.7188499807908893`*^9}, {3.718850206857872*^9, 3.7188502155075865`*^9}, {
+  3.7188503091532197`*^9, 3.7188503226588936`*^9}, {3.7188503720745716`*^9, 
+  3.7188503760070314`*^9}, {3.7188517726702423`*^9, 3.718851782905765*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"1a835989-a0b8-476d-bbbd-e9de5ea2d938"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"randomEcosphere", "[", 
+   RowBox[{
+   "ecosphereW_", ",", "ecosphereH_", ",", "ecosystemSize_", ",", 
+    "genomeSize_", ",", "codons_List"}], "]"}], ":=", 
+  RowBox[{"Array", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"randomEcosystem", "[", 
+      RowBox[{"ecosystemSize", ",", "genomeSize", ",", "codons"}], "]"}], 
+     "&"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"ecosphereW", ",", "ecosphereH"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.718848942264596*^9, 3.7188489798486633`*^9}, {
+  3.718849062347825*^9, 3.7188490889671445`*^9}, {3.7188491302921686`*^9, 
+  3.718849202921982*^9}, {3.7188492354501886`*^9, 3.7188492590998726`*^9}, {
+  3.718849306172263*^9, 3.718849353297132*^9}, {3.7188497361423116`*^9, 
+  3.718849760943807*^9}, {3.718852024213702*^9, 3.718852029461293*^9}, {
+  3.719104118512725*^9, 3.719104160954466*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"c22f79cd-4a43-4566-90e2-d22120b22fda"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ecosystemSpacings", "=", ".6"}], ";"}]], "Input",
+ CellChangeTimes->{{3.719104939827692*^9, 3.7191049445482535`*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"b28e9666-09db-44f3-859a-e8bf227af368"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"displayEcosystem", "[", 
+   RowBox[{
+    RowBox[{"ecosystem", "[", "genomes__", "]"}], ",", "genomeDisplayF_"}], 
+   "]"}], ":=", 
+  RowBox[{"GraphicsGrid", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"Replace", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{
+          RowBox[{"genome", "[", "genes__", "]"}], "\[RuleDelayed]", 
+          RowBox[{"genomeDisplayF", "/@", 
+           RowBox[{"{", "genes", "}"}]}]}]}], "]"}], ")"}], "&"}], "/@", 
+     RowBox[{"{", "genomes", "}"}]}], ",", 
+    RowBox[{"Spacings", "\[Rule]", 
+     RowBox[{"Scaled", "[", "ecosystemSpacings", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7188534724925756`*^9, 3.7188535340271683`*^9}, {
+   3.718853618292469*^9, 3.718853621785929*^9}, {3.7188536870629787`*^9, 
+   3.7188537090191402`*^9}, {3.718853761482074*^9, 3.718853767397332*^9}, {
+   3.7188539519615684`*^9, 3.718853992559613*^9}, 3.7188541991456327`*^9, {
+   3.718855005478012*^9, 3.71885502264795*^9}, {3.7188551128590794`*^9, 
+   3.7188551161129*^9}, {3.7188551614457655`*^9, 3.718855162463136*^9}, {
+   3.7188551938931727`*^9, 3.7188551975774994`*^9}, {3.7188925058028746`*^9, 
+   3.718892515945967*^9}, 3.718892554238324*^9, {3.7188932890976734`*^9, 
+   3.7188933116126013`*^9}, {3.719080378904025*^9, 3.7190804459336586`*^9}, 
+   3.719080531597372*^9, {3.7190805642607603`*^9, 3.7190805929097753`*^9}, {
+   3.7190807567402077`*^9, 3.7190807573556347`*^9}, {3.71908084666041*^9, 
+   3.719080870651678*^9}, 3.719080945248137*^9, {3.719104626722691*^9, 
+   3.7191046735071783`*^9}, {3.7191047136208534`*^9, 3.719104738756327*^9}, {
+   3.719104835844314*^9, 3.719104868851638*^9}, {3.719104949126404*^9, 
+   3.719104951095561*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"de3cec7d-15ae-4865-9a24-8d08e56857a5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"displayEcosphere", "[", 
+   RowBox[{"ecosphere_", ",", "genomeDisplayF_"}], "]"}], ":=", 
+  RowBox[{"GraphicsGrid", "[", 
+   RowBox[{
+    RowBox[{"ecosphere", "/.", 
+     RowBox[{
+      RowBox[{"ecosystem", "[", "attributes__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"displayEcosystem", "[", 
+       RowBox[{
+        RowBox[{"ecosystem", "[", "attributes", "]"}], ",", 
+        "genomeDisplayF"}], "]"}]}]}], ",", 
+    RowBox[{"Frame", "\[Rule]", "All"}], ",", 
+    RowBox[{"FrameStyle", "\[Rule]", 
+     RowBox[{"Directive", "[", 
+      RowBox[{"Thick", ",", "Gray"}], "]"}]}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+    RowBox[{"Spacings", "\[Rule]", 
+     RowBox[{"Scaled", "[", 
+      RowBox[{".22", "*", 
+       RowBox[{"ecosystemSpacings", "/", ".6"}]}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7188537252359715`*^9, 3.7188537377521334`*^9}, {
+   3.71885404801552*^9, 3.7188540680524883`*^9}, {3.718855062590291*^9, 
+   3.7188550816620216`*^9}, {3.7188551706469803`*^9, 3.718855173933683*^9}, {
+   3.7188552534176064`*^9, 3.7188552574369965`*^9}, {3.7188927292673836`*^9, 
+   3.7188927763116384`*^9}, {3.7188929949252434`*^9, 3.718893064034318*^9}, {
+   3.718893096617052*^9, 3.7188931017497272`*^9}, {3.718893271064577*^9, 
+   3.718893285398137*^9}, {3.718895172427169*^9, 3.7188951970827208`*^9}, {
+   3.7190277059800253`*^9, 3.719027709636671*^9}, {3.7190278966256275`*^9, 
+   3.7190278982126875`*^9}, {3.719081081443424*^9, 3.719081102880555*^9}, {
+   3.719104231636712*^9, 3.719104241955187*^9}, 3.719104455172546*^9, {
+   3.7191046978274655`*^9, 3.719104701171439*^9}, {3.7191047655396814`*^9, 
+   3.719104823442703*^9}, {3.7191048872674828`*^9, 3.7191048940184746`*^9}, {
+   3.7191049266921515`*^9, 3.7191049604567084`*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"765d3583-20d6-4e5c-8a0d-0563039df7af"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myPick", "[", 
+   RowBox[{"expr_", ",", "selector_", ",", "patt_"}], "]"}], ":=", 
+  RowBox[{"Extract", "[", 
+   RowBox[{"expr", ",", 
+    RowBox[{"Position", "[", 
+     RowBox[{"selector", ",", "patt"}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190261015996933`*^9, 3.7190261996537857`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"a41321b1-102e-4038-af9a-4f7ecc7ac7e4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pickReplace", "[", 
+   RowBox[{"expr_", ",", 
+    RowBox[{"lhs_", "\[Rule]", "rhs_"}], ",", "vars_"}], "]"}], ":=", 
+  RowBox[{"Fold", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#1", "/.", 
+      RowBox[{"#2", "\[Rule]", 
+       RowBox[{"myPick", "[", 
+        RowBox[{"expr", ",", "lhs", ",", "#2"}], "]"}]}]}], "&"}], ",", "rhs",
+     ",", "vars"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.719026488358674*^9, 3.719026562314076*^9}, {
+  3.7190267081117196`*^9, 3.719026710226548*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"b6a322de-dc23-4d3c-8afd-7b6bcc6197e8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"neighborFilter", "[", "neighbors_", "]"}], ":=", 
+  RowBox[{"pickReplace", "[", 
+   RowBox[{"neighbors", ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"_", ",", "b", ",", "_"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"b", ",", "a", ",", "b"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"_", ",", "b", ",", "_"}], "}"}]}], "}"}], "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Quiet", "[", 
+        RowBox[{"a", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "b"}], "}"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190280708284035`*^9, 3.7190281483738174`*^9}, {
+   3.7190283121937294`*^9, 3.7190283762094917`*^9}, 3.719028468235298*^9, {
+   3.719032066454239*^9, 3.719032068569654*^9}, {3.7190735782972593`*^9, 
+   3.7190735787504396`*^9}, {3.7190736348553004`*^9, 3.719073638269844*^9}, {
+   3.7190862500054097`*^9, 3.7190862721139464`*^9}, 3.7190976820694237`*^9, {
+   3.719097928998966*^9, 3.719097939586388*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"bab52780-2eb7-4a3e-9f56-a000fe0d7c04"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myMapAt", "[", 
+   RowBox[{"f_", ",", "expr_", ",", 
+    RowBox[{"{", "}"}]}], "]"}], ":=", 
+  RowBox[{"f", "[", "expr", "]"}]}]], "Input",
+ CellChangeTimes->{{3.700617246081929*^9, 3.7006172679515877`*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"97c75e0c-a775-41d9-84f3-369ea2e0861b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myMapAt", "[", 
+   RowBox[{"f_", ",", "expr_", ",", "pos_"}], "]"}], ":=", 
+  RowBox[{"MapAt", "[", 
+   RowBox[{"f", ",", "expr", ",", "pos"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.700617219105641*^9, 3.700617274654151*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"85d72f9a-a0d3-4454-8a7a-ab614f253671"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"replacePartWith", "[", 
+   RowBox[{"expr_", ",", "position_", ",", "rule_"}], "]"}], ":=", 
+  RowBox[{"myMapAt", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Replace", "[", 
+      RowBox[{"#", ",", "rule"}], "]"}], "&"}], ",", "expr", ",", 
+    "position"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.693691300738287*^9, 3.693691384092609*^9}, {
+  3.6936916550204735`*^9, 3.693691656140452*^9}, {3.700618862840847*^9, 
+  3.7006188638204412`*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"d8e4b3f4-92d4-417c-94f7-ef14f9ee59ef"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"replaceFirst", "[", 
+   RowBox[{"expr_", ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"Rule", "|", "RuleDelayed"}], ")"}], "[", 
+     RowBox[{"lhs_", ",", "rhs_"}], "]"}]}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"firstPosition", "=", 
+      RowBox[{"FirstPosition", "[", 
+       RowBox[{"expr", ",", "lhs"}], "]"}]}], "}"}], ",", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"MissingQ", "[", "firstPosition", "]"}], ",", "expr", ",", 
+      RowBox[{"replacePartWith", "[", 
+       RowBox[{"expr", ",", 
+        RowBox[{"FirstPosition", "[", 
+         RowBox[{"expr", ",", "lhs"}], "]"}], ",", 
+        RowBox[{"lhs", "\[RuleDelayed]", "rhs"}]}], "]"}]}], "]"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6936914268777113`*^9, 3.693691469932136*^9}, {
+   3.6936915022204885`*^9, 3.693691541500272*^9}, 3.696558827915262*^9, {
+   3.718978628246195*^9, 3.7189787847680225`*^9}, {3.718978832722234*^9, 
+   3.7189788332409887`*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"19bb3758-ea06-414b-9f63-6a3472689af6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"geneLists", "[", "expr_", "]"}], ":=", 
+  RowBox[{"Cases", "[", 
+   RowBox[{"expr", ",", 
+    RowBox[{
+     RowBox[{"genome", "[", "x__", "]"}], "\[RuleDelayed]", 
+     RowBox[{"{", "x", "}"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "Infinity"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190310555815573`*^9, 3.7190310943581047`*^9}, {
+  3.7190322754506006`*^9, 3.7190322789887695`*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"045184cc-3881-4950-9a94-4409217e813c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"farthest", "[", 
+   RowBox[{"l_", ",", "x_", ",", "distanceFunction_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"MaximalBy", "[", 
+   RowBox[{"l", ",", 
+    RowBox[{
+     RowBox[{"distanceFunction", "[", 
+      RowBox[{"x", ",", "#"}], "]"}], "&"}], ",", "n"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190706555116167`*^9, 3.7190707207857895`*^9}, {
+   3.7190708941895647`*^9, 3.7190708985405965`*^9}, {3.7191009863792152`*^9, 
+   3.7191009884113755`*^9}, {3.7191012371443844`*^9, 3.7191012431753845`*^9}, 
+   3.7191013710653296`*^9},
+ CellLabel->"In[15]:=",ExpressionUUID->"bd642de2-e79f-4fed-bd41-414c75d9c006"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"periodicDistance", "[", 
+   RowBox[{"x_", ",", "y_", ",", "size_"}], "]"}], ":=", 
+  RowBox[{"Norm", "[", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Mod", "[", 
+       RowBox[{
+        RowBox[{"#1", "-", "#2"}], ",", "size", ",", 
+        RowBox[{
+         RowBox[{"-", "size"}], "/", "2"}]}], "]"}], "&"}], ",", 
+     RowBox[{"FullSimplify", "/@", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}]}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.719118032186801*^9, 3.7191180625757627`*^9}, {
+  3.719118119345195*^9, 3.71911812121544*^9}, {3.7191181713120775`*^9, 
+  3.719118176191945*^9}, {3.719152696565364*^9, 3.7191527014037113`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"915524d3-4fc5-4147-ba94-33e26a4a9f7a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"periodicDistancePrime", "[", 
+   RowBox[{
+    RowBox[{"mean", ":", 
+     RowBox[{"{", 
+      RowBox[{"Indeterminate", ".."}], "}"}]}], ",", "y_", ",", "size_"}], 
+   "]"}], ":=", "0"}]], "Input",
+ CellChangeTimes->{{3.719100747504588*^9, 3.719100855466776*^9}, {
+  3.719100901869501*^9, 3.7191009269344616`*^9}, {3.7191014730132065`*^9, 
+  3.7191015025114403`*^9}, {3.7191017227289457`*^9, 3.7191017708045235`*^9}, {
+  3.7191183971528716`*^9, 3.7191184071674323`*^9}, {3.719118469391136*^9, 
+  3.7191185243352156`*^9}, {3.7191185763033943`*^9, 3.7191185765908995`*^9}, {
+  3.719118654081721*^9, 3.719118656419094*^9}, {3.71911875990704*^9, 
+  3.7191187962385798`*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"bc0eb6f3-c9b2-47ba-8d30-ee0ce9c3ecd0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"periodicDistancePrime", "[", 
+   RowBox[{"mean_", ",", "y_", ",", "size_"}], "]"}], ":=", 
+  RowBox[{"periodicDistance", "[", 
+   RowBox[{
+    RowBox[{"Delete", "[", 
+     RowBox[{"y", ",", 
+      RowBox[{"Position", "[", 
+       RowBox[{"mean", ",", "Indeterminate"}], "]"}]}], "]"}], ",", 
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{"mean", ",", "Indeterminate"}], "]"}], ",", "size"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.719100747504588*^9, 3.719100855466776*^9}, {
+  3.719100901869501*^9, 3.7191009269344616`*^9}, {3.7191014730132065`*^9, 
+  3.7191015025114403`*^9}, {3.7191016454206915`*^9, 3.7191016664838724`*^9}, {
+  3.7191182855830297`*^9, 3.7191183049273176`*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"4a8731e0-eff3-4959-b4f0-db1bc5cea4b5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"flipNegative", "[", 
+   RowBox[{"x_", ",", "flipAround_"}], "]"}], ":=", "x"}]], "Input",
+ CellChangeTimes->{{3.719101919548595*^9, 3.719101927350993*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"d4dd3ccb-2e92-4273-ab23-3abb5cb0c95d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"flipNegative", "[", 
+   RowBox[{
+    RowBox[{"x_", "?", "Negative"}], ",", "flipAround_"}], "]"}], ":=", 
+  RowBox[{"flipAround", "+", 
+   RowBox[{"(", 
+    RowBox[{"x", "-", 
+     RowBox[{"(", 
+      RowBox[{"-", "flipAround"}], ")"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.7190936574140167`*^9, 3.719093736964207*^9}, {
+  3.7190937772639256`*^9, 3.719093851843917*^9}, {3.7190939322773795`*^9, 
+  3.719093948138793*^9}, {3.7190940571750817`*^9, 3.71909407955881*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"ac21c478-3d6a-442f-9027-ffa9ac466991"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"periodicMean", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"numbers__", "?", "NumericQ"}], "}"}], ",", "period_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"period", "/", 
+     RowBox[{"(", 
+      RowBox[{"2", "Pi"}], ")"}]}], ")"}], 
+   RowBox[{"flipNegative", "[", 
+    RowBox[{
+     RowBox[{"Quiet", "[", 
+      RowBox[{"ArcTan", "@@", 
+       RowBox[{"Total", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"AngleVector", "[", 
+           RowBox[{"#", "*", "2", 
+            RowBox[{"Pi", "/", "period"}]}], "]"}], "&"}], "/@", 
+         RowBox[{"{", "numbers", "}"}]}], "]"}]}], "]"}], ",", "Pi"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7190941567859955`*^9, 3.719094195796764*^9}, {
+  3.719094664856979*^9, 3.7190947136243067`*^9}, {3.7190951220203314`*^9, 
+  3.719095145616078*^9}, {3.719095304696512*^9, 3.7190953051273937`*^9}, {
+  3.7190957199509816`*^9, 3.719095725283745*^9}, {3.7190958024877634`*^9, 
+  3.7190958047900043`*^9}, {3.7190958670365877`*^9, 3.7190958872619433`*^9}, {
+  3.719096701235541*^9, 3.7190967051047187`*^9}, {3.719102657402379*^9, 
+  3.719102670459861*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"980b66c2-392d-43f1-a851-eaad6f794281"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"periodicMean", "[", 
+   RowBox[{"l_", ",", "period_"}], "]"}], ":=", 
+  RowBox[{"MapThread", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"periodicMean", "[", 
+      RowBox[{
+       RowBox[{"{", "##", "}"}], ",", "period"}], "]"}], "&"}], ",", "l"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.719094718140698*^9, 3.71909477136817*^9}, {
+   3.7190948420330234`*^9, 3.7190948461324596`*^9}, 3.719095016929295*^9, 
+   3.719095161417674*^9},
+ CellLabel->"In[22]:=",ExpressionUUID->"e52faf70-7704-4216-9f3c-2c15db31c5a1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"selection", "[", 
+   RowBox[{"ecosystem_", ",", "neighbors_", ",", "distanceFunction_"}], "]"}],
+   ":=", 
+  RowBox[{"replaceFirst", "[", 
+   RowBox[{"ecosystem", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Apply", "[", 
+        RowBox[{"genome", ",", 
+         RowBox[{
+          RowBox[{"Nearest", "[", 
+           RowBox[{
+            RowBox[{"geneLists", "[", "ecosystem", "]"}], ",", "#", ",", "1", 
+            ",", 
+            RowBox[{"DistanceFunction", "\[Rule]", "distanceFunction"}]}], 
+           "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "\[Rule]", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"genome", ",", 
+         RowBox[{
+          RowBox[{"farthest", "[", 
+           RowBox[{
+            RowBox[{"geneLists", "[", "neighbors", "]"}], ",", "#", ",", 
+            "distanceFunction", ",", "1"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "&"}], "[", 
+     RowBox[{"periodicMean", "[", 
+      RowBox[{
+       RowBox[{"geneLists", "[", "ecosystem", "]"}], ",", "codonNum"}], "]"}],
+      "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190722984774103`*^9, 3.719072309632313*^9}, {
+   3.7190787964281373`*^9, 3.7190788048141184`*^9}, {3.7190864564029813`*^9, 
+   3.7190864684676886`*^9}, {3.719096920401163*^9, 3.719096931044469*^9}, {
+   3.7190982196394672`*^9, 3.7190982277037115`*^9}, {3.7190996302834935`*^9, 
+   3.7190996606861362`*^9}, {3.71911958408112*^9, 3.7191196000471597`*^9}, 
+   3.719151121144247*^9},
+ CellLabel->"In[23]:=",ExpressionUUID->"74c9f30a-f524-4432-a77f-58e8e7348fc1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"codonNum", "=", "5"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7190841056030025`*^9, 3.7190841200461607`*^9}, {
+  3.719084940144476*^9, 3.7190849405288596`*^9}, {3.719086366600216*^9, 
+  3.7190863668473268`*^9}, {3.7190982772379208`*^9, 3.719098277437627*^9}, {
+  3.7191045072674503`*^9, 3.719104507890833*^9}, {3.7191045408990335`*^9, 
+  3.719104547666855*^9}, {3.7191506332847652`*^9, 3.7191506337497807`*^9}},
+ CellLabel->"In[24]:=",ExpressionUUID->"ab3eeea2-dbb8-49ab-8abf-f3b718ea7ca1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"codons", "=", 
+   RowBox[{"Range", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"codonNum", "-", "1"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7190840678534946`*^9, 3.719084081309841*^9}, {
+  3.7190841235298667`*^9, 3.719084133443722*^9}, {3.7190842314652014`*^9, 
+  3.71908423176134*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"95f3e098-769d-4ae9-928a-915c7179aa3b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ecosphere", "=", 
+   RowBox[{"randomEcosphere", "[", 
+    RowBox[{"3", ",", "3", ",", "4", ",", "4", ",", "codons"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.7190795162572603`*^9, 3.7190795424529157`*^9}, 
+   3.7190830480407104`*^9, {3.7190832285636053`*^9, 3.719083229264007*^9}, {
+   3.719084400500971*^9, 3.7190844011345167`*^9}, {3.7190844732081213`*^9, 
+   3.7190844743944535`*^9}, {3.7190849228229494`*^9, 
+   3.7190849282837563`*^9}, {3.719084981563908*^9, 3.719084982331885*^9}, {
+   3.7190863558113713`*^9, 3.719086358943497*^9}, {3.719098288784419*^9, 
+   3.7190983020341997`*^9}, {3.7190986515433474`*^9, 
+   3.7190986539117746`*^9}, {3.719101799692377*^9, 3.7191018006083565`*^9}, {
+   3.719102259898654*^9, 3.7191022681639013`*^9}, {3.7191023183694787`*^9, 
+   3.719102319503543*^9}, {3.719104009253719*^9, 3.7191040104186893`*^9}, {
+   3.719104098012662*^9, 3.719104099146804*^9}, {3.7191507395266566`*^9, 
+   3.71915074304582*^9}, {3.7191529075723486`*^9, 3.719152912884242*^9}, {
+   3.71915328984455*^9, 3.7191532914924374`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"1c79588f-3749-4459-8eb8-54eb00a349f4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"genomeDisplayF", "[", 
+   RowBox[{"x_Integer", ",", "codonNum_"}], "]"}], ":=", 
+  RowBox[{"Graphics", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Hue", "[", 
+      RowBox[{"x", "/", "codonNum"}], "]"}], ",", 
+     RowBox[{"Rectangle", "[", "]"}]}], "}"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7190833946318636`*^9, 3.719083395803008*^9}, {
+  3.7190834702682867`*^9, 3.719083484248598*^9}, {3.7190835149307704`*^9, 
+  3.719083541839361*^9}, {3.719083595198902*^9, 3.719083627042409*^9}, {
+  3.719083836047877*^9, 3.719083874591669*^9}, {3.719083911308294*^9, 
+  3.719083952635436*^9}, {3.719084347964669*^9, 3.719084353463964*^9}, {
+  3.7190845167685895`*^9, 3.719084521548869*^9}, {3.7190846379380045`*^9, 
+  3.7190846397953176`*^9}, {3.7190847753452535`*^9, 3.719084789529397*^9}, {
+  3.7190861504900665`*^9, 3.7190861517274833`*^9}, {3.7190986348157043`*^9, 
+  3.719098636000176*^9}, {3.7191043508509274`*^9, 3.7191044095064487`*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"4e318782-a6fa-4705-a50f-0f578f6b4634"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Column", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"displayEcosphere", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"CellularAutomaton", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"selection", "[", 
+                 RowBox[{"#1", ",", "#2", ",", 
+                  RowBox[{
+                   RowBox[{"periodicDistancePrime", "[", 
+                    RowBox[{"#1", ",", "#2", ",", "codonNum"}], "]"}], 
+                   "&"}]}], "]"}], "&"}], "@@", "\[IndentingNewLine]", 
+               RowBox[{"neighborFilter", "[", "#", "]"}]}], "&"}], ",", 
+             RowBox[{"{", "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", "ecosphere", ",", 
+           RowBox[{"{", 
+            RowBox[{"{", "t", "}"}], "}"}]}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"genomeDisplayF", "[", 
+          RowBox[{"#", ",", "codonNum"}], "]"}], "&"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"\"\<t = \>\"", "<>", 
+       RowBox[{"ToString", "[", "t", "]"}]}]}], "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "100", ",", "1", ",", 
+     RowBox[{"DisplayAllSteps", "->", "True"}], ",", 
+     RowBox[{"AnimationRate", "\[Rule]", ".25"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", "False"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.719072744621287*^9, 3.7190728736822624`*^9}, {
+   3.7190729135544443`*^9, 3.719072916088414*^9}, {3.719078825658605*^9, 
+   3.7190788696246157`*^9}, {3.719079005461898*^9, 3.719079008100545*^9}, {
+   3.719079227146771*^9, 3.7190792279110556`*^9}, {3.719079473951197*^9, 
+   3.719079476683815*^9}, {3.7190816748680468`*^9, 3.7190816773211637`*^9}, {
+   3.71908400556079*^9, 3.7190840164477167`*^9}, {3.719086483229109*^9, 
+   3.7190865013566713`*^9}, 3.7190981321036296`*^9, {3.7190982050791745`*^9, 
+   3.7190982081950984`*^9}, {3.7191003161685143`*^9, 
+   3.7191003188436775`*^9}, {3.7191018283475122`*^9, 
+   3.7191018288635473`*^9}, {3.7191020287489595`*^9, 3.719102050851611*^9}, 
+   3.719102256637843*^9, 3.719103302280384*^9, {3.7191053155071187`*^9, 
+   3.7191053369150743`*^9}, 3.7191055056669083`*^9, {3.719105612292489*^9, 
+   3.7191056164533067`*^9}, {3.719105790019318*^9, 3.719105793159661*^9}, {
+   3.7191059091724243`*^9, 3.719105964690652*^9}, {3.7191078688316207`*^9, 
+   3.7191078750104513`*^9}, {3.71911820091206*^9, 3.7191182081975403`*^9}, {
+   3.7191183174075336`*^9, 3.7191183181131477`*^9}, 3.71912125521507*^9, {
+   3.719121413278344*^9, 3.719121450671674*^9}, {3.719121525181861*^9, 
+   3.7191215270062*^9}, {3.719121563486247*^9, 3.7191216048155556`*^9}, {
+   3.7191216366407237`*^9, 3.7191216845418186`*^9}, {3.7191217809745593`*^9, 
+   3.7191217861596403`*^9}, {3.7191220670068827`*^9, 
+   3.7191220672200475`*^9}, {3.719149570054391*^9, 3.719149592166791*^9}, 
+   3.719152956901092*^9, {3.7191530072360754`*^9, 3.719153007429332*^9}, {
+   3.736646325793423*^9, 3.7366463921041493`*^9}, {3.7366495421363883`*^9, 
+   3.7366495452621884`*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"16b57580-0532-4b1e-ab78-1543554c5d30"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`t$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`t$$], 0, 100, 1}}, Typeset`size$$ = {
+    1613., {820.5, 836.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`t$5353$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`t$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`t$$, $CellContext`t$5353$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         $CellContext`displayEcosphere[
+          Part[
+           
+           CellularAutomaton[{
+            Apply[$CellContext`selection[#, #2, \
+$CellContext`periodicDistancePrime[#, #2, $CellContext`codonNum]& ]& , 
+              $CellContext`neighborFilter[#]]& , {}, {1, 
+             1}}, $CellContext`ecosphere, {{$CellContext`t$$}}], 
+           1], $CellContext`genomeDisplayF[#, $CellContext`codonNum]& ], 
+         StringJoin["t = ", 
+          ToString[$CellContext`t$$]]}], 
+      "Specifications" :> {{$CellContext`t$$, 0, 100, 1, DisplayAllSteps -> 
+         True, AnimationRate -> 0.25}}, 
+      "Options" :> {SynchronousUpdating -> False}, "DefaultOptions" :> {}],
+     ImageSizeCache->{1738., {964., 980.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`displayEcosphere[
+         Pattern[$CellContext`ecosphere, 
+          Blank[]], 
+         Pattern[$CellContext`genomeDisplayF, 
+          Blank[]]] := GraphicsGrid[
+         ReplaceAll[$CellContext`ecosphere, $CellContext`ecosystem[
+            Pattern[$CellContext`attributes, 
+             BlankSequence[]]] :> $CellContext`displayEcosystem[
+            $CellContext`ecosystem[$CellContext`attributes], \
+$CellContext`genomeDisplayF]], Frame -> All, FrameStyle -> 
+         Directive[Thick, Gray], ImageSize -> Large, Spacings -> 
+         Scaled[0.22 ($CellContext`ecosystemSpacings/
+            0.6)]], $CellContext`ecosphere = {{
+          $CellContext`ecosystem[
+           $CellContext`genome[3, 0, 0, 4], 
+           $CellContext`genome[4, 4, 2, 2], 
+           $CellContext`genome[2, 3, 3, 0], 
+           $CellContext`genome[1, 0, 2, 4]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[4, 3, 1, 0], 
+           $CellContext`genome[1, 3, 2, 3], 
+           $CellContext`genome[3, 0, 3, 0], 
+           $CellContext`genome[1, 2, 2, 4]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[3, 1, 0, 0], 
+           $CellContext`genome[1, 4, 4, 1], 
+           $CellContext`genome[4, 4, 1, 0], 
+           $CellContext`genome[1, 3, 3, 1]]}, {
+          $CellContext`ecosystem[
+           $CellContext`genome[0, 2, 4, 3], 
+           $CellContext`genome[0, 3, 1, 0], 
+           $CellContext`genome[4, 4, 3, 0], 
+           $CellContext`genome[3, 3, 4, 2]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[2, 2, 3, 2], 
+           $CellContext`genome[1, 2, 3, 3], 
+           $CellContext`genome[2, 2, 2, 4], 
+           $CellContext`genome[0, 0, 3, 0]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[1, 3, 1, 3], 
+           $CellContext`genome[1, 2, 2, 2], 
+           $CellContext`genome[3, 0, 0, 1], 
+           $CellContext`genome[0, 4, 4, 0]]}, {
+          $CellContext`ecosystem[
+           $CellContext`genome[0, 4, 4, 4], 
+           $CellContext`genome[1, 2, 0, 2], 
+           $CellContext`genome[4, 4, 1, 1], 
+           $CellContext`genome[2, 4, 3, 0]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[2, 2, 1, 3], 
+           $CellContext`genome[1, 1, 3, 0], 
+           $CellContext`genome[3, 1, 3, 2], 
+           $CellContext`genome[2, 3, 1, 3]], 
+          $CellContext`ecosystem[
+           $CellContext`genome[0, 0, 1, 2], 
+           $CellContext`genome[0, 3, 2, 0], 
+           $CellContext`genome[4, 0, 2, 1], 
+           $CellContext`genome[1, 2, 1, 0]]}}, $CellContext`genomeDisplayF[
+         Pattern[$CellContext`x, 
+          Blank[Integer]], 
+         Pattern[$CellContext`codonNum, 
+          Blank[]]] := Graphics[{
+          Hue[$CellContext`x/$CellContext`codonNum], 
+          Rectangle[]}], $CellContext`codonNum = 
+       5, $CellContext`displayEcosystem[
+         $CellContext`ecosystem[
+          Pattern[$CellContext`genomes, 
+           BlankSequence[]]], 
+         Pattern[$CellContext`genomeDisplayF, 
+          Blank[]]] := GraphicsGrid[
+         Map[Replace[#, $CellContext`genome[
+             Pattern[$CellContext`genes, 
+              BlankSequence[]]] :> 
+           Map[$CellContext`genomeDisplayF, {$CellContext`genes}]]& , \
+{$CellContext`genomes}], Spacings -> 
+         Scaled[$CellContext`ecosystemSpacings]], \
+$CellContext`ecosystemSpacings = 0.6, $CellContext`selection[
+         Pattern[$CellContext`ecosystem, 
+          Blank[]], 
+         Pattern[$CellContext`neighbors, 
+          Blank[]], 
+         Pattern[$CellContext`distanceFunction, 
+          Blank[]]] := $CellContext`replaceFirst[$CellContext`ecosystem, 
+         (Apply[$CellContext`genome, 
+           Part[
+            Nearest[
+             $CellContext`geneLists[$CellContext`ecosystem], #, 1, 
+             DistanceFunction -> $CellContext`distanceFunction], 1]] -> 
+         Apply[$CellContext`genome, 
+           Part[
+            $CellContext`farthest[
+             $CellContext`geneLists[$CellContext`neighbors], #, \
+$CellContext`distanceFunction, 1], 1]]& )[
+          $CellContext`periodicMean[
+           $CellContext`geneLists[$CellContext`ecosystem], \
+$CellContext`codonNum]]], $CellContext`replaceFirst[
+         Pattern[$CellContext`expr, 
+          Blank[]], 
+         Alternatives[Rule, RuleDelayed][
+          Pattern[$CellContext`lhs, 
+           Blank[]], 
+          Pattern[$CellContext`rhs, 
+           Blank[]]]] := 
+       With[{$CellContext`firstPosition = 
+          FirstPosition[$CellContext`expr, $CellContext`lhs]}, 
+         If[
+          MissingQ[$CellContext`firstPosition], $CellContext`expr, 
+          $CellContext`replacePartWith[$CellContext`expr, 
+           
+           FirstPosition[$CellContext`expr, $CellContext`lhs], \
+$CellContext`lhs :> $CellContext`rhs]]], $CellContext`replacePartWith[
+         Pattern[$CellContext`expr, 
+          Blank[]], 
+         Pattern[$CellContext`position, 
+          Blank[]], 
+         Pattern[$CellContext`rule, 
+          Blank[]]] := $CellContext`myMapAt[
+        Replace[#, $CellContext`rule]& , $CellContext`expr, \
+$CellContext`position], $CellContext`myMapAt[
+         Pattern[$CellContext`f, 
+          Blank[]], 
+         Pattern[$CellContext`expr, 
+          
+          Blank[]], {}] := $CellContext`f[$CellContext`expr], \
+$CellContext`myMapAt[
+         Pattern[$CellContext`f, 
+          Blank[]], 
+         Pattern[$CellContext`expr, 
+          Blank[]], 
+         Pattern[$CellContext`pos, 
+          Blank[]]] := 
+       MapAt[$CellContext`f, $CellContext`expr, $CellContext`pos], \
+$CellContext`geneLists[
+         Pattern[$CellContext`expr, 
+          Blank[]]] := Cases[$CellContext`expr, $CellContext`genome[
+           Pattern[$CellContext`x, 
+            BlankSequence[]]] :> {$CellContext`x}, {
+         0, Infinity}], $CellContext`farthest[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`distanceFunction, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       MaximalBy[$CellContext`l, \
+$CellContext`distanceFunction[$CellContext`x, #]& , $CellContext`n], \
+$CellContext`periodicMean[{
+          PatternTest[
+           Pattern[$CellContext`numbers, 
+            BlankSequence[]], NumericQ]}, 
+         Pattern[$CellContext`period, 
+          Blank[]]] := ($CellContext`period/(2 Pi)) $CellContext`flipNegative[
+          Quiet[
+           Apply[ArcTan, 
+            Total[
+             Map[
+             AngleVector[# 
+               2 (Pi/$CellContext`period)]& , {$CellContext`numbers}]]]], 
+          Pi], $CellContext`periodicMean[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`period, 
+          Blank[]]] := MapThread[$CellContext`periodicMean[{
+           SlotSequence[
+           1]}, $CellContext`period]& , $CellContext`l], \
+$CellContext`flipNegative[
+         PatternTest[
+          Pattern[$CellContext`x, 
+           Blank[]], Negative], 
+         Pattern[$CellContext`flipAround, 
+          
+          Blank[]]] := $CellContext`flipAround + ($CellContext`x - \
+-$CellContext`flipAround), $CellContext`flipNegative[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`flipAround, 
+          Blank[]]] := $CellContext`x, $CellContext`periodicDistancePrime[
+         Pattern[$CellContext`mean, {
+           Repeated[Indeterminate]}], 
+         Pattern[$CellContext`y, 
+          Blank[]], 
+         Pattern[$CellContext`size, 
+          Blank[]]] := 0, $CellContext`periodicDistancePrime[
+         Pattern[$CellContext`mean, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]], 
+         Pattern[$CellContext`size, 
+          Blank[]]] := $CellContext`periodicDistance[
+         Delete[$CellContext`y, 
+          Position[$CellContext`mean, Indeterminate]], 
+         DeleteCases[$CellContext`mean, 
+          Indeterminate], $CellContext`size], $CellContext`periodicDistance[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]], 
+         Pattern[$CellContext`size, 
+          Blank[]]] := Norm[
+         MapThread[Mod[# - #2, $CellContext`size, -$CellContext`size/2]& , 
+          Map[
+          FullSimplify, {$CellContext`x, $CellContext`y}]]], \
+$CellContext`neighborFilter[
+         Pattern[$CellContext`neighbors, 
+          Blank[]]] := $CellContext`pickReplace[$CellContext`neighbors, {{
+            Blank[], $CellContext`b, 
+            Blank[]}, {$CellContext`b, $CellContext`a, $CellContext`b}, {
+            Blank[], $CellContext`b, 
+            Blank[]}} -> {
+           Quiet[
+            
+            Part[$CellContext`a, 
+             1]], $CellContext`b}, {$CellContext`a, $CellContext`b}], \
+$CellContext`pickReplace[
+         Pattern[$CellContext`expr, 
+          Blank[]], Pattern[$CellContext`lhs, 
+           Blank[]] -> Pattern[$CellContext`rhs, 
+           Blank[]], 
+         Pattern[$CellContext`vars, 
+          Blank[]]] := 
+       Fold[ReplaceAll[#, #2 -> $CellContext`myPick[$CellContext`expr, \
+$CellContext`lhs, #2]]& , $CellContext`rhs, $CellContext`vars], \
+$CellContext`myPick[
+         Pattern[$CellContext`expr, 
+          Blank[]], 
+         Pattern[$CellContext`selector, 
+          Blank[]], 
+         Pattern[$CellContext`patt, 
+          Blank[]]] := Extract[$CellContext`expr, 
+         Position[$CellContext`selector, $CellContext`patt]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.7191078982098866`*^9, {3.71910816567923*^9, 3.7191081872470894`*^9}, {
+   3.719118203159629*^9, 3.7191182089799967`*^9}, 3.7191183188342686`*^9, 
+   3.7191184213350363`*^9, 3.7191185356693416`*^9, 3.7191186113954268`*^9, 
+   3.7191186775730677`*^9, 3.719118802661203*^9, 3.719119605440016*^9, {
+   3.7191214214286194`*^9, 3.7191214320861177`*^9}, 3.7191215277109003`*^9, {
+   3.719121567689139*^9, 3.7191216056917725`*^9}, {3.7191216422616234`*^9, 
+   3.7191216692223063`*^9}, 3.719121787207938*^9, 3.7191220688575506`*^9, {
+   3.7191495723037214`*^9, 3.719149593597742*^9}, 3.7191507122467003`*^9, 
+   3.7191527887432375`*^9, 3.7191529248361206`*^9, 3.7191529720898676`*^9, 
+   3.719153019530752*^9, 3.719153303780156*^9, {3.732758635464101*^9, 
+   3.732758653972521*^9}, {3.736645978666168*^9, 3.7366459870107756`*^9}, 
+   3.7366486704926395`*^9, 3.7366495634493375`*^9},
+ CellLabel->"Out[29]=",ExpressionUUID->"93abace5-f1ad-4a75-adc8-40e118ed44f5"]
+}, Open  ]]
+},
+WindowSize->{3200, 1595},
+WindowMargins->{{-16, Automatic}, {Automatic, -16}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 635, 12, 112, "Input",ExpressionUUID->"22e908fa-0dfc-4ee3-9717-8194d6ae2455"],
+Cell[1196, 34, 944, 17, 112, "Input",ExpressionUUID->"1a835989-a0b8-476d-bbbd-e9de5ea2d938"],
+Cell[2143, 53, 960, 20, 166, "Input",ExpressionUUID->"c22f79cd-4a43-4566-90e2-d22120b22fda"],
+Cell[3106, 75, 230, 4, 112, "Input",ExpressionUUID->"b28e9666-09db-44f3-859a-e8bf227af368"],
+Cell[3339, 81, 1831, 35, 166, "Input",ExpressionUUID->"de3cec7d-15ae-4865-9a24-8d08e56857a5"],
+Cell[5173, 118, 1887, 36, 219, "Input",ExpressionUUID->"765d3583-20d6-4e5c-8a0d-0563039df7af"],
+Cell[7063, 156, 415, 9, 112, "Input",ExpressionUUID->"a41321b1-102e-4038-af9a-4f7ecc7ac7e4"],
+Cell[7481, 167, 602, 15, 112, "Input",ExpressionUUID->"b6a322de-dc23-4d3c-8afd-7b6bcc6197e8"],
+Cell[8086, 184, 1184, 27, 112, "Input",ExpressionUUID->"bab52780-2eb7-4a3e-9f56-a000fe0d7c04"],
+Cell[9273, 213, 321, 7, 112, "Input",ExpressionUUID->"97c75e0c-a775-41d9-84f3-369ea2e0861b"],
+Cell[9597, 222, 342, 7, 112, "Input",ExpressionUUID->"85d72f9a-a0d3-4454-8a7a-ab614f253671"],
+Cell[9942, 231, 559, 13, 112, "Input",ExpressionUUID->"d8e4b3f4-92d4-417c-94f7-ef14f9ee59ef"],
+Cell[10504, 246, 1104, 27, 168, "Input",ExpressionUUID->"19bb3758-ea06-414b-9f63-6a3472689af6"],
+Cell[11611, 275, 521, 12, 112, "Input",ExpressionUUID->"045184cc-3881-4950-9a94-4409217e813c"],
+Cell[12135, 289, 646, 13, 112, "Input",ExpressionUUID->"bd642de2-e79f-4fed-bd41-414c75d9c006"],
+Cell[12784, 304, 797, 19, 112, "Input",ExpressionUUID->"915524d3-4fc5-4147-ba94-33e26a4a9f7a"],
+Cell[13584, 325, 782, 15, 112, "Input",ExpressionUUID->"bc0eb6f3-c9b2-47ba-8d30-ee0ce9c3ecd0"],
+Cell[14369, 342, 801, 17, 112, "Input",ExpressionUUID->"4a8731e0-eff3-4959-b4f0-db1bc5cea4b5"],
+Cell[15173, 361, 269, 5, 112, "Input",ExpressionUUID->"d4dd3ccb-2e92-4273-ab23-3abb5cb0c95d"],
+Cell[15445, 368, 590, 13, 112, "Input",ExpressionUUID->"ac21c478-3d6a-442f-9027-ffa9ac466991"],
+Cell[16038, 383, 1246, 30, 112, "Input",ExpressionUUID->"980b66c2-392d-43f1-a851-eaad6f794281"],
+Cell[17287, 415, 553, 14, 112, "Input",ExpressionUUID->"e52faf70-7704-4216-9f3c-2c15db31c5a1"],
+Cell[17843, 431, 1618, 38, 272, "Input",ExpressionUUID->"74c9f30a-f524-4432-a77f-58e8e7348fc1"],
+Cell[19464, 471, 525, 8, 112, "Input",ExpressionUUID->"ab3eeea2-dbb8-49ab-8abf-f3b718ea7ca1"],
+Cell[19992, 481, 411, 9, 112, "Input",ExpressionUUID->"95f3e098-769d-4ae9-928a-915c7179aa3b"],
+Cell[20406, 492, 1170, 19, 112, "Input",ExpressionUUID->"1c79588f-3749-4459-8eb8-54eb00a349f4"],
+Cell[21579, 513, 1061, 19, 112, "Input",ExpressionUUID->"4e318782-a6fa-4705-a50f-0f578f6b4634"],
+Cell[CellGroupData[{
+Cell[22665, 536, 3491, 67, 431, "Input",ExpressionUUID->"16b57580-0532-4b1e-ab78-1543554c5d30"],
+Cell[26159, 605, 12622, 290, 2130, "Output",ExpressionUUID->"93abace5-f1ad-4a75-adc8-40e118ed44f5"]
+}, Open  ]]
+}
+]
+*)
+
